@@ -1,0 +1,19 @@
+@import './navbar', './products', './cart';
+
+.itemListActive {
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+    transition: ease-in-out .1s;
+}
+
+.submenu__active {
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+    transition: ease-in-out .1s;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.containerInfo{
+    margin: 10vh 1em;
+}
