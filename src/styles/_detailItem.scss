@@ -1,0 +1,17 @@
+.pr{
+    &__detalle{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
+        gap: 1rem;
+        grid-auto-flow: dense;
+        grid-auto-rows: 30rem;
+        box-sizing: border-box;
+    }
+    &__detalleImage{
+        text-align: -webkit-right;
+        img{
+            width: 30rem;
+            height: auto;
+        }
+    }
+}

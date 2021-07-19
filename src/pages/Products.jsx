@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import {Link} from 'react-router-dom'
 
 export default function Products(props) {
 
@@ -14,8 +15,18 @@ export default function Products(props) {
                 <img src={props.image} alt='Imágen producto' />
             </div>
             <div className='pr__price'>
-                {props.price}
+                ${props.price}
             </div>
+            <Link to={{
+                pathname: `/Detalle/${props.id}/${qty}`,
+                aboutProps: { 
+                    infoItem: props,
+                    cart: props.cart, 
+                    addToCart: props.addToCart
+                }
+            }}>
+                Ver detalle
+            </Link>
             <form onSubmit={ (data) => { props.addToCart(data, props) } }>
                 <button type='button' onClick={() => {setqty(qty+1)}}>+</button>
                 <input type='number' readOnly disabled value={qty}/>

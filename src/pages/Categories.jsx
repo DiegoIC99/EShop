@@ -13,10 +13,8 @@ export default function Categories(props) {
         urlApi += idCategory ? `/${idCategory}` : '';
 
     const getProducts = async () => {
-        let llamada = fetch(`http://localhost:4000/${urlApi}`);
-        llamada = await llamada;
-        llamada = await llamada.text();
-        llamada = JSON.parse(llamada);
+        let llamada = await fetch(`http://localhost:4000/${urlApi}`);
+        llamada = await llamada.json();
 
         setproducts(llamada);
     }
@@ -48,10 +46,15 @@ export default function Categories(props) {
 
         setcart( itemExist === '' ? [...cart, item] : [...cart])
 
+        return item;
+
     }
     
     useEffect(() => {
+
+        const ac = new AbortController();
         getProducts()
+        return () => ac.abort();
     }, [idCategory]);
 
     return(
@@ -65,6 +68,7 @@ export default function Categories(props) {
                         title={element.title}
                         image={element.image}
                         price={element.price}
+                        cart={cart}
                         addToCart={updateCart}/>
 
                 )
