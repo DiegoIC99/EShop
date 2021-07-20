@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Cart from './Cart'
+import CounterStock from './CounterStock'
 
 import { useContext } from '../Context/Context'
 
@@ -10,10 +11,9 @@ export default function ItemDetail(props) {
 
     let history = useHistory();
 
-    const {idProducto, qtyItem} = useParams();
+    const {idProducto} = useParams();
     const [products, setproducts] = useState([])
-    const [qty, setqty] = useState(parseFloat(qtyItem))
-    const { cart, updateCart } = useContext()
+    const { cart } = useContext()
 
     let propsItem = '';
 
@@ -50,12 +50,7 @@ export default function ItemDetail(props) {
                                 <h3>Título: {element.title}</h3>
                                 <h3>Descripción: {element.descripcion}</h3>
                                 <h3>Precio: {element.price}</h3>
-                                <form onSubmit={ (data) => {updateCart(data, propsItem)} }>
-                                    <button type='button' onClick={() => {setqty(qty+1)}}>+</button>
-                                    <input type='number' readOnly disabled value={qty}/>
-                                    <button type='button' onClick={() => { qty === 1 ? setqty(qty) : setqty(qty-1)}}>-</button>
-                                    <button className='pr__addCart'>Añadir al carrito</button>
-                                </form>
+                                <CounterStock item={propsItem}/>
                             </div>
                         </div>
                     )

@@ -17,7 +17,8 @@ export function ContextProvider(props) {
             title: props.title,
             qty: data.target[1].value,
             price: props.price,
-            id: props.id
+            id: props.id,
+            stock: props.stock
         }
 
         cart.forEach( element => {
@@ -28,7 +29,8 @@ export function ContextProvider(props) {
                 itemExist = 'X';
             }
             
-            element.qty = newQty;
+            if(newQty <= element.stock)
+                element.qty = newQty;
             
         })
 

@@ -1,13 +1,8 @@
 import {useState} from 'react'
 import {Link} from 'react-router-dom'
-
-import {useContext} from '../Context/Context'
+import CounterStock from './CounterStock'
 
 export default function Products(props) {
-
-    const [qty, setqty] = useState(1)
-
-    const { updateCart } = useContext()
 
     return(
         <div className='pr__item'>
@@ -22,19 +17,17 @@ export default function Products(props) {
                 ${props.price}
             </div>
             <Link to={{
-                pathname: `/Detalle/${props.id}/${qty}`,
+                pathname: `/Detalle/${props.id}`,
                 aboutProps: { 
                     infoItem: props,
                 }
             }}>
                 Ver detalle
             </Link>
-            <form onSubmit={ (data) => { updateCart(data, props) } }>
-                <button type='button' onClick={() => {setqty(qty+1)}}>+</button>
-                <input type='number' readOnly disabled value={qty}/>
-                <button type='button' onClick={() => { qty === 1 ? setqty(qty) : setqty(qty-1)}}>-</button>
-                <button className='pr__addCart'>Añadir al carrito</button>
-            </form>
+            <div className='pr__stock'>
+                Stock actual: <b>{props.stock}</b>
+            </div>
+            <CounterStock item={props} />
         </div>
     )
 

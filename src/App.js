@@ -7,7 +7,7 @@ import NavBar from './NavBar'
 import Categories from './pages/Categories'
 import ItemDetail from './pages/ItemDetail'
 
-import {ContextProvider, useContext} from './Context/Context'
+import {ContextProvider} from './Context/Context'
 
 export default () => 
   <ContextProvider>
@@ -23,7 +23,7 @@ function App() {
         <Route path={'/'} exact component={Home} />
         <Route path={'/Productos/:hasCategory/:idCategory'} exact component={Categories} />
         <Route path={'/Productos'} exact component={Categories} />
-        <Route path={'/Detalle/:idProducto/:qtyItem'} exact component={ItemDetail} />
+        <Route path={'/Detalle/:idProducto'} exact component={ItemDetail} />
       </Switch>
     </Router>
   );

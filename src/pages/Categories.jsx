@@ -32,7 +32,8 @@ export default function Categories(props) {
                         id={element.id}
                         title={element.title}
                         image={element.image}
-                        price={element.price}/>
+                        price={element.price}
+                        stock={element.stock}/>
 
                 )
             })
