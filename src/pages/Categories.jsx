@@ -7,7 +7,6 @@ export default function Categories(props) {
 
     const {idCategory, hasCategory} = useParams();
     const [products, setproducts] = useState([]);
-    const [cart, setcart] = useState([]);
 
     let urlApi = hasCategory ? `product/${hasCategory}` : 'products';
         urlApi += idCategory ? `/${idCategory}` : '';
@@ -19,42 +18,8 @@ export default function Categories(props) {
         setproducts(llamada);
     }
 
-    const updateCart = (data, props) => {
-
-        data.preventDefault();
-
-        let itemExist = '';
-
-        let item = {
-            title: props.title,
-            qty: data.target[1].value,
-            price: props.price,
-            id: props.id
-        }
-
-        cart.forEach( element => {
-
-            let newQty = props.id === element.id ? parseFloat(element.qty) + parseFloat(data.target[1].value) : element.qty;
-
-            if(props.id === element.id) {
-                itemExist = 'X';
-            }
-            
-            element.qty = newQty;
-            
-        })
-
-        setcart( itemExist === '' ? [...cart, item] : [...cart])
-
-        return item;
-
-    }
-    
     useEffect(() => {
-
-        const ac = new AbortController();
         getProducts()
-        return () => ac.abort();
     }, [idCategory]);
 
     return(
@@ -67,16 +32,13 @@ export default function Categories(props) {
                         id={element.id}
                         title={element.title}
                         image={element.image}
-                        price={element.price}
-                        cart={cart}
-                        addToCart={updateCart}/>
+                        price={element.price}/>
 
                 )
             })
         }
         {
-            <Cart 
-                cart={cart}/>
+            <Cart />
         }
         </div>
     )

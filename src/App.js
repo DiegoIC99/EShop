@@ -7,6 +7,14 @@ import NavBar from './NavBar'
 import Categories from './pages/Categories'
 import ItemDetail from './pages/ItemDetail'
 
+import {ContextProvider, useContext} from './Context/Context'
+
+export default () => 
+  <ContextProvider>
+    <App></App>
+  </ContextProvider>
+
+
 function App() {
   return (
     <Router>
@@ -20,5 +28,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

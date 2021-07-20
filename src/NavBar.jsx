@@ -2,7 +2,12 @@ import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 
+import { useContext } from './Context/Context'
+
 export default function NavBar(props) {
+
+    const { cartShow, setcartShow } = useContext()
+
     return(
         <header className='nb__header'>
             <nav className='nb__nav'>
@@ -31,7 +36,9 @@ export default function NavBar(props) {
                         </ul>
                     </li>
                     <li>
-                        <FontAwesomeIcon icon={faCartPlus} />
+                        <a onClick={ () => {setcartShow(!cartShow ? true : false)} }>
+                            <FontAwesomeIcon icon={faCartPlus} />
+                        </a>
                     </li>
                 </ul>
             </nav>

@@ -1,5 +1,9 @@
 @import './navbar', './products', './cart', './detailItem';
 
+*{
+    user-select: none;
+}
+
 .itemListActive {
     border-bottom: 1px solid white;
     padding-bottom: 10px;
@@ -16,4 +20,12 @@
 
 .containerInfo{
     margin: 10vh 1em;
+}
+
+.cartShown{
+    display: block;
+}
+
+.cartHidden{
+    display: none;
 }

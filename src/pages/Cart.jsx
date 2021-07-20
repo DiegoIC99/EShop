@@ -1,12 +1,20 @@
+
+import { useContext } from '../Context/Context'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
+
 export default function Cart(props) {
 
-    let cart = props.cart;
+    const { cartShow, cart } = useContext()
+
+    let cartShown = cartShow ? 'cartShown' : 'cartHidden'
 
     return(
-        <div className={`pu__cart`}>
-            <div className='pu__title'>
-
-            </div>
+        <div className={`pu__cart ${cartShown}`}>
+            <h3 className='pu__title'>
+                <FontAwesomeIcon icon={faCartPlus} /> Carrito de compras
+            </h3>
+            <hr />
             <div>
                 {
                     cart.map((element, index) =>{

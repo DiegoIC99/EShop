@@ -183,6 +183,23 @@
   height: auto;
 }
 
+.pr__goback {
+  position: absolute;
+  left: 1rem;
+  top: 12vh;
+  font-size: 1.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+* {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 .itemListActive {
   border-bottom: 1px solid white;
   padding-bottom: 10px;
@@ -201,5 +218,13 @@
 
 .containerInfo {
   margin: 10vh 1em;
+}
+
+.cartShown {
+  display: block;
+}
+
+.cartHidden {
+  display: none;
 }
 /*# sourceMappingURL=index.css.map */

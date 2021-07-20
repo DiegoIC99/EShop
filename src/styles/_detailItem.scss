@@ -14,4 +14,13 @@
             height: auto;
         }
     }
+    &__goback{
+        position: absolute;
+        left: 1rem;
+        top: 12vh;
+        font-size: 1.4rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
 }
