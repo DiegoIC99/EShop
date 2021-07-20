@@ -4,7 +4,7 @@ $colorPrincipal: #3f51b5;
     &__containerProds{
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-        gap: 1rem;
+        gap: 3rem;
         grid-auto-flow: dense;
         grid-auto-rows: 22rem;
         text-align: center;

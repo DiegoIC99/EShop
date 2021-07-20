@@ -68,7 +68,7 @@
   display: grid;
   -ms-grid-columns: (minmax(20rem, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  gap: 1rem;
+  gap: 3rem;
   grid-auto-flow: dense;
   grid-auto-rows: 22rem;
   text-align: center;
@@ -217,7 +217,7 @@
 }
 
 .containerInfo {
-  margin: 10vh 1em;
+  margin: 12vh 1em;
 }
 
 .cartShown {
