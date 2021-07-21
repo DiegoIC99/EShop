@@ -15,25 +15,44 @@ export default function ItemDetail(props) {
     const [products, setproducts] = useState([])
     const { cart } = useContext()
 
-    let propsItem = '';
-
-    if(props.location.aboutProps === undefined){
-        history.goBack();
-    }else {
-        propsItem = props.location.aboutProps.infoItem;
-    }
-
     const getDetail = async () => {
 
-        let llamada = await fetch(`http://localhost:4000/product/${idProducto}`);
-            llamada = await llamada.json();
+        let llamada = [];
+        
+        fetch(`http://localhost:4000/product/${idProducto}`)
+        .then(function(response) {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response.json();
+        }).then(function(response) {
+            llamada = response;
+            setproducts(llamada);
+        }).catch(function(error) {
+            console.log(error);
+        });
 
-        setproducts(llamada);
+        
     }
 
     useEffect(() => {
         getDetail();
     }, [idProducto])
+
+    let item = [];
+
+    if(products != [])
+        products.forEach(Element => {
+            item = {
+                id: Element.id,
+                image: Element.image,
+                price: Element.price,
+                stock: Element.stock,
+                title: Element.title
+            }
+        })
+
+        console.log(products)
 
     return(
         <>
@@ -51,7 +70,7 @@ export default function ItemDetail(props) {
                                 <h3>Descripción: {element.descripcion}</h3>
                                 <h3>Precio: {element.price}</h3>
                                 <h3>Stock: {element.stock}</h3>
-                                <CounterStock item={propsItem}/>
+                                <CounterStock item={item}/>
                             </div>
                         </div>
                     )

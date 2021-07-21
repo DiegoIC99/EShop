@@ -6,6 +6,8 @@ export default function CounterStock(props) {
     const { updateCart } = useContext()
     const [qty, setqty] = useState(1)
 
+    console.log(props)
+
     return(
 
         <form onSubmit={ (data) => { updateCart(data, props.item) } }>
