@@ -11,11 +11,23 @@ export default function Categories(props) {
     let urlApi = hasCategory ? `product/${hasCategory}` : 'products';
         urlApi += idCategory ? `/${idCategory}` : '';
 
-    const getProducts = async () => {
-        let llamada = await fetch(`http://localhost:4000/${urlApi}`);
-        llamada = await llamada.json();
+    const getProducts = () => {
 
-        setproducts(llamada);
+        fetch(`http://localhost:4000/${urlApi}`)
+        .then((response) => {
+            if(!response.ok){
+                throw new Error('Hubo un error al obtener la información')
+            }
+            return response.json()
+        })
+        .then((response) => {
+            console.log(response)
+            setproducts(response)
+        })
+        .catch( (e) => {
+            new Error(e);
+        })
+
     }
 
     useEffect(() => {

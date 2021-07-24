@@ -2,6 +2,7 @@
 import { useContext } from '../Context/Context'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 
 export default function Cart(props) {
 
@@ -31,9 +32,9 @@ export default function Cart(props) {
                 }
             </div>
             <div className='pu__footer'>
-                <button>
-                    Continuar con el pago
-                </button>
+                <Link to='/cart'>
+                    <button>Continuar con el pago</button>
+                </Link>
             </div>
         </div>
     )

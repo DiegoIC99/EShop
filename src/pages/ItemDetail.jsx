@@ -15,7 +15,7 @@ export default function ItemDetail(props) {
     const [products, setproducts] = useState([])
     const { cart } = useContext()
 
-    const getDetail = async () => {
+    const getDetail = () => {
 
         let llamada = [];
         
@@ -26,8 +26,14 @@ export default function ItemDetail(props) {
             }
             return response.json();
         }).then(function(response) {
-            llamada = response;
-            setproducts(llamada);
+
+            if(response.length == 0) {
+                throw new Error('No hay un producto asociado a ese ID')
+            }else {
+                llamada = response;
+                setproducts(llamada);
+            }
+
         }).catch(function(error) {
             console.log(error);
         });
