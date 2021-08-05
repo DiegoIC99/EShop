@@ -52,4 +52,19 @@ app.get('/product/category/:categoryID', (req,res) => {
     res.send(json);
 
 })
+
+
+app.get('/categories', (req,res) => {
+    console.log('estamos Seleccion de categorias');
+
+   var json = fs.readFileSync('./Categories.json',"utf8",(err,content) =>{
+       err ? console.log(err):JSON.parse(content);
+    });
+
+    json = JSON.parse(json);
+    res.send(json);
+
+})
+
+
 app.listen(port, () => console.log(`Example app listening on ${port} port!`))

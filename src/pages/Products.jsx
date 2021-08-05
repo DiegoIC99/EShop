@@ -24,9 +24,6 @@ export default function Products(props) {
             }}>
                 Ver detalle
             </Link>
-            <div className='pr__stock'>
-                Stock actual: <b>{props.stock}</b>
-            </div>
             <CounterStock item={props} />
         </div>
     )

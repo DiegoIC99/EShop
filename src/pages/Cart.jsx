@@ -18,6 +18,7 @@ export default function Cart(props) {
             <hr />
             <div>
                 {
+                    cart.length > 0 ?
                     cart.map((element, index) =>{
                         return(
                             <ItemsCart
@@ -29,12 +30,21 @@ export default function Cart(props) {
                             />
                         )
                     })
+                    :
+                    <h4>
+                        No hay items seleccionados
+                    </h4>
                 }
             </div>
             <div className='pu__footer'>
-                <Link to='/cart'>
-                    <button>Continuar con el pago</button>
-                </Link>
+                {
+                    cart.length > 0 ?
+                    <Link to='/cart'>
+                        <button>Finalizar compra</button>
+                    </Link>
+                    :
+                    null
+                }
             </div>
         </div>
     )

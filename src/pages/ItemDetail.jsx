@@ -58,8 +58,6 @@ export default function ItemDetail(props) {
             }
         })
 
-        console.log(products)
-
     return(
         <>
             {
@@ -75,7 +73,6 @@ export default function ItemDetail(props) {
                                 <h3>Título: {element.title}</h3>
                                 <h3>Descripción: {element.descripcion}</h3>
                                 <h3>Precio: {element.price}</h3>
-                                <h3>Stock: {element.stock}</h3>
                                 <CounterStock item={item}/>
                             </div>
                         </div>

@@ -1,0 +1,18 @@
+[
+
+    {
+        "id":1,
+        "cod_categoria":"Procesadores",
+        "name":"Procesadores"
+    },
+    {
+        "id":1,
+        "cod_categoria":"Placas-de-video",
+        "name":"Placas de video"
+    },
+    {
+        "id":1,
+        "cod_categoria":"perifericos",
+        "name":"Perifericos"
+    }
+]

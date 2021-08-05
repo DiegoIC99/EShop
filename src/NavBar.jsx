@@ -1,12 +1,35 @@
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect } from 'react'
 
 import { useContext } from './Context/Context'
 
 export default function NavBar(props) {
 
     const { cartShow, setcartShow } = useContext()
+    const [categories, setCategories] = useState([])
+
+    const getCategories = () => {
+        fetch(`http://localhost:4000/categories`)
+        .then((response) => {
+            if(!response.ok){
+                throw new Error('Hubo un error al obtener la información')
+            }
+            return response.json()
+        })
+        .then((response) => {
+            console.log(response)
+            setCategories(response)
+        })
+        .catch( (e) => {
+            new Error(e);
+        })
+    }
+
+    useEffect(() => {
+        getCategories();
+    })
 
     return(
         <header className='nb__header'>
@@ -24,15 +47,15 @@ export default function NavBar(props) {
                             <li>
                                 <NavLink to='/Productos' activeClassName='submenu__active'>Todas</NavLink>
                             </li>
-                            <li>
-                                <NavLink to='/Productos/category/Placas-de-video' activeClassName='submenu__active'>Placas de video</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to='/Productos/category/Procesadores' activeClassName='submenu__active'>Procesadores</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to='/Productos/category/perifericos' activeClassName='submenu__active'>Perifericos</NavLink>
-                            </li>
+                            {
+                                categories.map((item, index) => {
+                                    return(
+                                        <li key={index}>
+                                            <NavLink to={`/Productos/category/${item.cod_categoria}`} activeClassName='submenu__active'>{item.name}</NavLink>
+                                        </li>
+                                    )
+                                })
+                            }
                         </ul>
                     </li>
                     <li>

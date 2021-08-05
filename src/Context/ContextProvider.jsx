@@ -33,7 +33,7 @@ export function ContextProvider(props) {
             
         })
 
-        setcart( itemExist === '' ? [...cart, item] : [...cart])
+        setcart( itemExist === '' && data.target[1].value > 0 ? [...cart, item] : [...cart])
 
         return item;
 
