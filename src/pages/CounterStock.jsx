@@ -10,6 +10,7 @@ export default function CounterStock(props) {
     useEffect(() => {
 
         setStock(props.item.stock)
+        setqty(0);
 
     }, [props.item.stock])
 
