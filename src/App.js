@@ -7,7 +7,7 @@ import NavBar from './NavBar'
 import Categories from './pages/Categories'
 import ItemDetail from './pages/ItemDetail'
 
-import {ContextProvider} from './Context/ContextProvider'
+import ContextProvider from './Context/ContextProvider'
 
 export default () =>
   <ContextProvider>

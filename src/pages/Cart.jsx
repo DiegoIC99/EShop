@@ -3,12 +3,21 @@ import { useContext } from '../Context/Context'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
+import { memo } from 'react'
 
-export default function Cart(props) {
+function Cart(props) {
 
-    const { cartShow, cart } = useContext()
+    const { cartShow, cart, updateCart } = useContext()
 
     let cartShown = cartShow ? 'cartShown' : 'cartHidden'
+
+    let totalPrice = 0 ;
+
+    cart.forEach((element) => {
+
+        totalPrice = parseFloat(totalPrice) + (parseFloat(element.price) * element.qty); 
+        
+    })
 
     return(
         <div className={`pu__cart ${cartShown}`}>
@@ -27,6 +36,7 @@ export default function Cart(props) {
                                 title={element.title}
                                 qty={element.qty}
                                 price={element.price}
+                                removeItem={updateCart}
                             />
                         )
                     })
@@ -40,7 +50,7 @@ export default function Cart(props) {
                 {
                     cart.length > 0 ?
                     <Link to='/cart'>
-                        <button>Finalizar compra</button>
+                        <button>Finalizar compra <br /> Total: ${totalPrice}</button>
                     </Link>
                     :
                     null
@@ -49,6 +59,8 @@ export default function Cart(props) {
         </div>
     )
 }
+
+export default memo(Cart);
 
 export function ItemsCart(props) {
 
@@ -62,6 +74,7 @@ export function ItemsCart(props) {
             </div>
             <div className='card__qty'>
                 Cantidad: <b>{props.qty}</b>
+                <button type='button' onClick={() => {props.removeItem(this, props, 'remove')}}>-</button>
             </div>
         </div>
     )

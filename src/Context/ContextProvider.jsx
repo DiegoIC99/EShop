@@ -1,35 +1,53 @@
-import React, {useState} from 'react'
+import React, {useState, memo} from 'react'
 import {Provider} from './Context'
 
-export function ContextProvider(props) {
+function ContextProvider(props) {
 
     const [cartShow, setcartShow] = useState(false)
     const [cart, setcart] = useState([]);
+    let newCartProv = [];
 
-    const updateCart = (data, props) => {
+    const updateCart = (data, props, type) => {
 
-        data.preventDefault();
+        if(data !== undefined)
+            data.preventDefault();
 
         let itemExist = '';
 
-        let item = {
-            title: props.title,
-            qty: data.target[1].value,
-            price: props.price,
-            id: props.id,
-            stock: props.stock
-        }
+        var item;
 
-        cart.forEach( element => {
+        if(type === 'add')
+            item = {
+                title: props.title,
+                qty: data.target[1].value,
+                price: props.price,
+                id: props.id,
+                stock: props.stock
+            }
 
-            let newQty = props.id === element.id ? parseFloat(element.qty) + parseFloat(data.target[1].value) : element.qty;
+        cart.map( (element, index) => {
+
+            let newQty;
 
             if(props.id === element.id) {
+
                 itemExist = 'X';
+
+                if(type === 'add'){
+                    newQty = props.id === element.id ? parseFloat(element.qty) + parseFloat(data.target[1].value) : element.qty;
+                }else {
+                    newQty = props.id === element.id && element.qty - 1;
+                }
+
+                if(newQty === 0) {
+                    cart.splice(index, 1)
+                }
+
+                if(newQty <= element.stock){
+                    element.qty = newQty;
+                }
+
             }
-            
-            if(newQty <= element.stock)
-                element.qty = newQty;
             
         })
 
@@ -49,3 +67,5 @@ export function ContextProvider(props) {
     return <Provider value={value} {...props} />
 
 }
+
+export default memo(ContextProvider);

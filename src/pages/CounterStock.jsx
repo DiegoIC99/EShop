@@ -1,11 +1,17 @@
 import {useContext} from '../Context/Context'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 export default function CounterStock(props) {
 
     const { updateCart } = useContext()
     const [qty, setqty] = useState(0)
     const [stock, setStock] = useState(props.item.stock)
+
+    useEffect(() => {
+
+        setStock(props.item.stock)
+
+    }, [props.item.stock])
 
     const onAdd = () => {
 
@@ -30,15 +36,13 @@ export default function CounterStock(props) {
         <div className='pr__stock'>
             <h3>Stock: {stock}</h3>
         </div>
-        <form onSubmit={ (data) => { updateCart(data, props.item) } }>
+        <form onSubmit={ (data) => { updateCart(data, props.item, 'add') } }>
             <button type='button' onClick={onAdd}>+</button>
             <input type='number' readOnly disabled value={qty}/>
             <button type='button' onClick={onRemove}>-</button>
             {
-                qty > 0 ?
+                qty > 0 &&
                 <button className='pr__addCart'>Añadir <b>{qty}</b> al carrito</button>
-                : 
-                null
             }
         </form>
         </>

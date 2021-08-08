@@ -7,8 +7,9 @@ import { useContext } from './Context/Context'
 
 export default function NavBar(props) {
 
-    const { cartShow, setcartShow } = useContext()
+    const { cartShow, setcartShow, cart } = useContext()
     const [categories, setCategories] = useState([])
+    let totalItems = 0;
 
     const getCategories = () => {
         fetch(`http://localhost:4000/categories`)
@@ -29,6 +30,10 @@ export default function NavBar(props) {
 
     useEffect(() => {
         getCategories();
+    }, [])
+
+    cart.forEach((element) => {
+        totalItems = totalItems + parseFloat(element.qty);
     })
 
     return(
@@ -59,8 +64,11 @@ export default function NavBar(props) {
                         </ul>
                     </li>
                     <li>
-                        <a onClick={ () => {setcartShow(!cartShow ? true : false)} }>
+                        <a style={{position: 'relative'}} onClick={ () => {setcartShow(!cartShow ? true : false)} }>
                             <FontAwesomeIcon icon={faCartPlus} />
+                            {
+                                totalItems !== 0 && <div className="totalItemsCart">{totalItems}</div>
+                            }
                         </a>
                     </li>
                 </ul>
