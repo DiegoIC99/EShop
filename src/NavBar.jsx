@@ -20,7 +20,6 @@ export default function NavBar(props) {
             return response.json()
         })
         .then((response) => {
-            console.log(response)
             setCategories(response)
         })
         .catch( (e) => {
@@ -44,14 +43,11 @@ export default function NavBar(props) {
                 </div>
                 <ul className='nb__items'>
                     <li>
-                        <NavLink to='/' activeClassName='itemListActive'>Inicio</NavLink>
+                        <NavLink to='/Productos'>Catálogo</NavLink>
                     </li>
                     <li to='' className='list__submenu'>
-                        Productos
+                        Categorías
                         <ul>
-                            <li>
-                                <NavLink to='/Productos' activeClassName='submenu__active'>Todas</NavLink>
-                            </li>
                             {
                                 categories.map((item, index) => {
                                     return(

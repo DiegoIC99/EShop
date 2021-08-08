@@ -1,11 +1,12 @@
 import React, {useState, memo} from 'react'
 import {Provider} from './Context'
+import { getFirestore } from '../firebase'
 
 function ContextProvider(props) {
 
     const [cartShow, setcartShow] = useState(false)
     const [cart, setcart] = useState([]);
-    let newCartProv = [];
+    const [orderKey, setOrderKey] = useState();
 
     const updateCart = (data, props, type) => {
 
@@ -57,11 +58,48 @@ function ContextProvider(props) {
 
     }
 
+    const createOrder = async (totalPrice, date, data) => {
+
+        data.preventDefault();
+
+        const new_order = {
+            buyer: {
+                name: data.target[0].value,
+                phone: data.target[1].value,
+                email: data.target[2].value
+            },
+            ordenes: {
+                        cart,
+                        totalItem: totalPrice,
+                        date: date
+                     }
+        }
+
+        const conn = getFirestore();
+        const collection = conn.collection('orders');
+        const response = await collection.add(new_order);
+
+        setcart([])
+        setOrderKey(response.id)
+
+    }
+
+    let totalPrice = 0;
+
+    cart.forEach((element) => {
+
+        totalPrice = parseFloat(totalPrice) + (parseFloat(element.price) * element.qty); 
+        
+    })
+
     const value = {
         cartShow,
         setcartShow,
         cart,
-        updateCart
+        updateCart,
+        createOrder,
+        orderKey,
+        totalPrice
     }
 
     return <Provider value={value} {...props} />

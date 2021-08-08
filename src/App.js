@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import NavBar from './NavBar'
 import Categories from './pages/Categories'
 import ItemDetail from './pages/ItemDetail'
+import CartDetail from './pages/CartDetail'
 
 import ContextProvider from './Context/ContextProvider'
 
@@ -23,6 +24,7 @@ function App() {
           <Route path={'/Productos/:hasCategory/:idCategory'} exact component={Categories} />
           <Route path={'/Productos'} exact component={Categories} />
           <Route path={'/Detalle/:idProducto'} exact component={ItemDetail} />
+          <Route path={'/CartDetail'} exact component={CartDetail} />
         </Switch>
       </Router>
   );

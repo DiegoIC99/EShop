@@ -1,11 +1,12 @@
 import { useParams, useHistory } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Cart from './Cart'
 import CounterStock from './CounterStock'
 
 import { useContext } from '../Context/Context'
+import { getFirestore } from '../firebase'
 
 export default function ItemDetail(props) {
 
@@ -15,30 +16,19 @@ export default function ItemDetail(props) {
     const [products, setproducts] = useState([])
     const { cart } = useContext()
 
-    const getDetail = () => {
+    const getDetail = async () => {
 
-        let llamada = [];
-        
-        fetch(`http://localhost:4000/product/${idProducto}`)
-        .then(function(response) {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            }
-            return response.json();
-        }).then(function(response) {
+        let Products = [];
 
-            if(response.length == 0) {
-                throw new Error('No hay un producto asociado a ese ID')
-            }else {
-                llamada = response;
-                setproducts(llamada);
-            }
+        const conn = getFirestore();
+        const collection = conn.collection("products");
+        const condicion = await collection.where("id","==",idProducto).get();
 
-        }).catch(function(error) {
-            console.log(error);
-        });
+        condicion.forEach((item) => {
+            Products.push(item.data())
+        })
 
-        
+        setproducts(Products)
     }
 
     useEffect(() => {
@@ -61,6 +51,8 @@ export default function ItemDetail(props) {
     return(
         <>
             {
+                products.length > 0 
+                ?
                 products.map( (element, index) => {
                     return(
                         <div key={index} className='pr__detalle containerInfo'>
@@ -78,6 +70,8 @@ export default function ItemDetail(props) {
                         </div>
                     )
                 })
+                : 
+                <h3 className="centered">Cargando producto</h3>
             }
             {
             <Cart 

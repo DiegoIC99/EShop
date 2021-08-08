@@ -7,17 +7,9 @@ import { memo } from 'react'
 
 function Cart(props) {
 
-    const { cartShow, cart, updateCart } = useContext()
+    const { cartShow, cart, updateCart, totalPrice } = useContext()
 
     let cartShown = cartShow ? 'cartShown' : 'cartHidden'
-
-    let totalPrice = 0 ;
-
-    cart.forEach((element) => {
-
-        totalPrice = parseFloat(totalPrice) + (parseFloat(element.price) * element.qty); 
-        
-    })
 
     return(
         <div className={`pu__cart ${cartShown}`}>
@@ -49,8 +41,8 @@ function Cart(props) {
             <div className='pu__footer'>
                 {
                     cart.length > 0 ?
-                    <Link to='/cart'>
-                        <button>Finalizar compra <br /> Total: ${totalPrice}</button>
+                    <Link to='/CartDetail'>
+                        <button>Ver detalle de compra <br /> <h3>Total:  ${totalPrice} </h3></button> 
                     </Link>
                     :
                     null
