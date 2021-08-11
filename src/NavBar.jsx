@@ -4,6 +4,7 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 
 import { useContext } from './Context/Context'
+import {getFirestore} from './firebase'
 
 export default function NavBar(props) {
 
@@ -11,20 +12,21 @@ export default function NavBar(props) {
     const [categories, setCategories] = useState([])
     let totalItems = 0;
 
-    const getCategories = () => {
-        fetch(`http://localhost:4000/categories`)
-        .then((response) => {
-            if(!response.ok){
-                throw new Error('Hubo un error al obtener la información')
-            }
-            return response.json()
+    const getCategories = async () => {
+
+        let Categories = [];
+
+        const conn = getFirestore();
+        const collection = conn.collection("products");
+        const query = await collection.get();
+
+        query.forEach((item, index) => {
+            Categories.push(item.data().categoria)
         })
-        .then((response) => {
-            setCategories(response)
-        })
-        .catch( (e) => {
-            new Error(e);
-        })
+
+        var filterCategories = Categories.filter((value, index) => Categories.indexOf(value) === index)
+
+        setCategories(filterCategories)
     }
 
     useEffect(() => {
@@ -52,7 +54,7 @@ export default function NavBar(props) {
                                 categories.map((item, index) => {
                                     return(
                                         <li key={index}>
-                                            <NavLink to={`/Productos/category/${item.cod_categoria}`} activeClassName='submenu__active'>{item.name}</NavLink>
+                                            <NavLink to={`/Productos/category/${item}`} activeClassName='submenu__active'>{item}</NavLink>
                                         </li>
                                     )
                                 })
