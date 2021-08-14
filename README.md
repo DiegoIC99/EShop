@@ -14,7 +14,7 @@ Mira Deployment para conocer como desplegar el proyecto.
 <hr />
 Que cosas necesitas para instalar el software y como instalarlas.
 
-  * Tener instalado Node.js y NPM. (Descargar del navegador)
+  * Tener instalado Node.js. (Descargar del navegador)
   * Abrir la consola en el directorio del programa.
   * Ejecutar npm -i
 
