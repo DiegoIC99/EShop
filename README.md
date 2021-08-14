@@ -7,7 +7,6 @@ Tienda online para compra de productos de tecnología.
 <hr />
 Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
 
-Mira Deployment para conocer como desplegar el proyecto.
 <br />
 
 <h3>Pre-requisitos 📋</h3>
