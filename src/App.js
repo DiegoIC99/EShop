@@ -10,13 +10,9 @@ import CartDetail from './pages/CartDetail'
 
 import ContextProvider from './Context/ContextProvider'
 
-export default () =>
-  <ContextProvider>
-    <App></App>
-  </ContextProvider>
-
 function App() {
   return (
+    <ContextProvider>
       <Router>
         <NavBar />
         <Switch>
@@ -27,5 +23,8 @@ function App() {
           <Route path={'/CartDetail'} exact component={CartDetail} />
         </Switch>
       </Router>
+    </ContextProvider>
   );
 }
+
+export default App;

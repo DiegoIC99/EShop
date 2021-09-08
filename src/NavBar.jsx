@@ -45,6 +45,9 @@ export default function NavBar(props) {
                 </div>
                 <ul className='nb__items'>
                     <li>
+                        <NavLink to='/'>Home</NavLink>
+                    </li>
+                    <li>
                         <NavLink to='/Productos'>Catálogo</NavLink>
                     </li>
                     <li to='' className='list__submenu'>

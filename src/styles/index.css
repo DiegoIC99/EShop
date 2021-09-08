@@ -281,4 +281,23 @@
 .centered {
   text-align: center;
 }
+
+.first__header {
+  background: #3f51b5;
+  color: white;
+  margin-left: 17%;
+  margin-right: 17%;
+  padding: 1rem;
+  border-radius: 7px;
+}
+
+.button_cat {
+  font-size: 32px;
+  text-decoration: none;
+  cursor: pointer;
+  background: #673ab7;
+  color: white;
+  padding: 1rem;
+  border-radius: 50px;
+}
 /*# sourceMappingURL=index.css.map */
